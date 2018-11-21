@@ -1,0 +1,277 @@
+
+티스토리 메뉴 펼치기 검색로그인
+티스토리 서비스 메인
+프로필 이미지
+공간사랑
+방명록
+글쓰기, 알림, 통계 확인은 티스토리앱에서
+openssl sha256 sha512 sha384 sample
+티스토리 메뉴 펼치기댓글수0 공감수 0 메뉴 더보기
+network_security
+openssl sha256 sha512 sha384 sample
+공간사랑
+2013.10.15 09:24 댓글수0 공감수 0
+ 
+
+ 
+
+
+http://www.askyb.com/cpp/openssl-sha256-hashing-example-in-cpp/
+
+
+OpenSSL SHA256 Hashing Example in C++
+
+
+This tutorial will guide you on how to hash a string by using OpenSSL’s SHA256 hash function. This tutorial will create two C++ example files which will compile and run in Ubuntu environment.
+
+
+1. Here are the openssl SHA256 sample source code.
+
+
+Example #1: sha256_sample1.cpp
+
+#include <stdio.h>
+#include <string.h>
+#include <openssl/sha.h>
+
+int main()
+{
+    unsigned char digest[SHA256_DIGEST_LENGTH];
+    char string[] = "hello world";
+    
+    SHA256((unsigned char*)&string, strlen(string), (unsigned char*)&digest);   
+
+    char mdString[SHA256_DIGEST_LENGTH*2+1];
+
+    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+         sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
+
+    printf("SHA256 digest: %s\n", mdString);
+
+    return 0;
+}
+
+
+Example #2: sha256_sample2.cpp
+
+#include <stdio.h>
+#include <string.h>
+#include <openssl/sha.h>
+
+int main() {
+    unsigned char digest[SHA256_DIGEST_LENGTH];
+    const char* string = "hello world";
+
+    SHA256_CTX ctx;
+    SHA256_Init(&ctx);
+    SHA256_Update(&ctx, string, strlen(string));
+    SHA256_Final(digest, &ctx);
+
+    char mdString[SHA256_DIGEST_LENGTH*2+1];
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+        sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
+
+    printf("SHA256 digest: %s\n", mdString);
+
+
+    return 0;
+}
+
+ 
+
+2. Let’s try to compile both sample cpp files and you should observe the following output screenshot.
+
+~$ gcc sha256_sample1.cpp -o sample1 -lcrypto
+~$ ./sample1
+SHA256 digest: b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+~$ gcc sha256_sample2.cpp -o sample2 -lcrypto
+~$ ./sample2
+SHA256 digest: b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+
+
+Note: -lcrypto will include the crypto library from openssl
+
+ 
+
+http://www.askyb.com/cpp/openssl-sha512-hashing-example-in-cpp/
+
+
+}
+
+
+Example #2: sha512_sample2.cpp
+
+#include <stdio.h>
+#include <string.h>
+#include <openssl/sha.h>
+
+int main() {
+    unsigned char digest[SHA512_DIGEST_LENGTH];
+    const char* string = "hello world";
+
+    SHA512_CTX ctx;
+    SHA512_Init(&ctx);
+    SHA512_Update(&ctx, string, strlen(string));
+    SHA512_Final(digest, &ctx);
+
+    char mdString[SHA512_DIGEST_LENGTH*2+1];
+    for (int i = 0; i < SHA512_DIGEST_LENGTH; i++)
+        sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
+
+    printf("SHA512 digest: %s\n", mdString);
+
+
+    return 0;
+}
+
+2. Let’s try to compile both sample cpp files and you should observe the following output screenshot.
+
+
+~$ gcc sha512_sample1.cpp -o sample1 -lcrypto
+~$ ./sample1
+SHA512 digest: 309ecc489c12d6eb4cc40f50c902f2b4d0ed77ee511a7c7a9bcd3ca86d4cd86f989dd35bc5ff499670da34255b45b0cfd830e81f605dcf7dc5542e93ae9cd76f
+~$ gcc sha512_sample2.cpp -o sample2 -lcrypto
+~$ ./sample2
+SHA512 digest: 309ecc489c12d6eb4cc40f50c902f2b4d0ed77ee511a7c7a9bcd3ca86d4cd86f989dd35bc5ff499670da34255b45b0cfd830e81f605dcf7dc5542e93ae9cd76f
+
+ 
+
+Note: -lcrypto will include the crypto library from openssl
+
+ 
+
+ 
+
+ 
+
+http://www.askyb.com/cpp/openssl-sha384-hashing-example-in-cpp/
+
+OpenSSL SHA384 Hashing Example in C++
+
+This tutorial will guide you on how to hash a string by using OpenSSL’s SHA384 hash function. This tutorial will create two C++ example files which will compile and run in Ubuntu environment.
+
+
+1. Here are the openssl SHA384 sample source code.
+
+Example #1: sha384_sample1.cpp
+
+
+#include <stdio.h>
+#include <string.h>
+#include <openssl/sha.h>
+
+int main()
+{
+    unsigned char digest[SHA384_DIGEST_LENGTH];
+    char string[] = "hello world";
+    
+    SHA384((unsigned char*)&string, strlen(string), (unsigned char*)&digest);   
+
+    char mdString[SHA384_DIGEST_LENGTH*2+1];
+
+    for(int i = 0; i < SHA384_DIGEST_LENGTH; i++)
+         sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
+
+    printf("SHA384 digest: %s\n", mdString);
+
+    return 0;
+}
+
+
+Example #2: sha384_sample2.cpp
+
+#include <stdio.h>
+#include <string.h>
+#include <openssl/sha.h>
+
+int main() {
+    unsigned char digest[SHA512_DIGEST_LENGTH];
+    const char* string = "hello world";
+
+    SHA512_CTX ctx;
+    SHA384_Init(&ctx);
+    SHA384_Update(&ctx, string, strlen(string));
+    SHA384_Final(digest, &ctx);
+
+    char mdString[SHA384_DIGEST_LENGTH*2+1];
+    for (int i = 0; i < SHA384_DIGEST_LENGTH; i++)
+        sprintf(&mdString[i*2], "%02x", (unsigned int)digest[i]);
+
+    printf("SHA384 digest: %s\n", mdString);
+
+
+    return 0;
+}
+
+2. Let’s try to compile both sample cpp files and you should observe the following output screenshot.
+
+~$ gcc sha384_sample1.cpp -o sample1 -lcrypto
+~$ ./sample1
+SHA384 digest: fdbd8e75a67f29f701a4e040385e2e23986303ea10239211af907fcbb83578b3e417cb71ce646efd0819dd8c088de1bd
+~$ gcc sha384_sample2.cpp -o sample2 -lcrypto
+~$ ./sample2
+SHA384 digest: fdbd8e75a67f29f701a4e040385e2e23986303ea10239211af907fcbb83578b3e417cb71ce646efd0819dd8c088de1bd
+
+Note: -lcrypto will include the crypto library from openssl
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 공감sns신고
+이 글은 로그인 후에 댓글을 남길 수 있습니다.
+로딩 중
+이전글
+date형의 인덱스 사용시 형변환 관련
+2013.10.14 19:10
+다음글
+2013년10월15일 11시 30분 설악산 중청봉에 첫눈이 내리다.
+2013.10.15 19:37
+이 블로그 인기 글
+
+아이핀 유효기간 연장
+공간사랑
+
+금호아시아나 그룹 가계도
+공간사랑
+
+윈도우10의 배경화면 파일 위치
+공간사랑
+
+수도권 지하철 자전거 휴대기준
+공간사랑
+
+Hypertext Transfer Protocol (HTTP) Status Code Registry
+공간사랑
+
+2018년 여권지수 상위 10위
+공간사랑
