@@ -35,6 +35,7 @@ class Key extends Vault
         ];
 
         return $this->requestApi('POST', $apiCall, $options);
+
     }
 
     /* Gets the public part of a stored key.

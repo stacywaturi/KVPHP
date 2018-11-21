@@ -16,7 +16,7 @@ $keyVault = new keyVaultCert(
     [
         'accessToken'  => azureAuthorisation::getKeyVaultToken(
             [
-                'appTenantDomainName'   => Config::$APP_TENANT_ID ,
+                'appTenantDomainName'   => Config::$APP_TENANT_ID,
                 'clientId'              => Config::$CLIENT_ID,
                 'username'              => Config::$USERNAME,
                 'password'              => Config::$PASSWORD
@@ -27,4 +27,4 @@ $keyVault = new keyVaultCert(
 );
 
 //GET CSR
-var_dump($keyVault->getCSR('cert1512'));
+var_dump($keyVault->getCSR('cert15112'));

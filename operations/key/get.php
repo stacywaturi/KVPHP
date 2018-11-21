@@ -27,7 +27,7 @@ $keyVault = new KeyVaultKey(
 );
 $getKeyResponse = $keyVault->get("key1311");
 
-if ($getKeyResponse["responsecode"]==200){
+if ($getKeyResponse["responsecode"] == 200) {
     var_dump($getKeyResponse['data']['key']);
 }
 else {
