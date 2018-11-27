@@ -54,6 +54,7 @@ class Certificate extends Vault
     --------------------------------------------------------------------------------
     GET {vaultBaseUrl}/certificates/{certificate-name}/pending?api-version=2016-10-01
     --------------------------------------------------------------------------------
+
     */
     public function getCSR(string $certName)
     {
@@ -64,7 +65,7 @@ class Certificate extends Vault
          if ($response["responsecode"]==200) {
              $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n" . $response['data']['csr'] . "\n-----END CERTIFICATE REQUEST-----";
 
-             $myfile = fopen("CSRs/newfile.csr", "w") or die ("Unable to open file!");
+             $myfile = fopen("CSRs/".$certName.".csr", "w") or die ("Unable to open file!");
 
              fwrite($myfile, $CSR);
 
@@ -94,7 +95,7 @@ class Certificate extends Vault
     public function merge(string $certName, string $fileName)
     {
         $apiCall = "certificates/{$certName}/pending/merge?api-version=2016-10-01";
-        $myfile = fopen("CSRs/".$fileName,"r") or die("Unable to open file");
+        $myfile = fopen("certs/".$fileName,"r") or die("Unable to open file");
         $cert = fread($myfile, filesize("CSRs/".$fileName));
 
         $cert = str_replace("-----BEGIN CERTIFICATE-----\r\n", "", $cert );
@@ -121,6 +122,23 @@ class Certificate extends Vault
 
         $response = $this->requestApi('GET', $apiCall);
 
-        return $response;
+        var_dump($response);
+
+        if ($response["responsecode"]==200) {
+            $Cert = "-----BEGIN CERTIFICATE-----\n" . $response['data']['cer'] . "\n-----END CERTIFICATE-----";
+
+            $myfile = fopen("certs/".$certName.".crt", "w") or die ("Unable to open file!");
+
+            fwrite($myfile, $Cert);
+
+            fclose($myfile);
+            return $Cert;
+        }
+
+        else {
+            var_dump($response["responseMessage"]);
+            return -1;
+        }
+
     }
 }

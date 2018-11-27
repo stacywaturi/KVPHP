@@ -17,9 +17,3 @@ class Config {
     static $WEBSITE_NAME = 'My New Website';
     static $IMAGE_DIR    = 'img';
 }
-//return [
-//    'appTenantDomainName' => 'azureisolvtech.onmicrosoft.com' ,
-//    'clientId'            => '9d98c3f3-78fa-4449-ae07-6a01f58a8446',
-//    'username'        => 'stacy@isolvtech.com',
-//    'password'        => '100#I100s100l'
-//];

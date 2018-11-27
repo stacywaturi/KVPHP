@@ -20,10 +20,26 @@ abstract class Vault
         $this->accessToken = $keyVaultDetails['accessToken'];
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKeyVault()
+    {
+        return $this->keyVault;
+    }
 
     /*
     * Set the name of the key vault you want to interact with
     */
+
 
     private function setKeyVaultName($keyVaultName)
     {

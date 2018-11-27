@@ -12,6 +12,7 @@ use azure\keyvault\Key as keyVaultKey;
 use azure\authorisation\Token as azureAuthorisation;
 use azure\Config;
 
+
 $keyVault = new KeyVaultKey(
     [
         'accessToken'  => azureAuthorisation::getKeyVaultToken(
@@ -25,6 +26,7 @@ $keyVault = new KeyVaultKey(
         'keyVaultName' => Config::$KEY_VAULT_NAME
     ]
 );
+
 //var_dump($keyVault->create('key1311','RSA','2048'));
 $createKeyResponse = $keyVault->create('key1311','RSA','2048');
 if ($createKeyResponse["responsecode"]==200){

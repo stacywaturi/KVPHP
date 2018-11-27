@@ -32,6 +32,7 @@ if($mergeCertResponse["responsecode"]==201)
 {
     var_dump($mergeCertResponse);
 }
-else {
+else
+    {
     var_dump($mergeCertResponse["responseMessage"]);
 }

@@ -12,8 +12,11 @@
 *
 */
 
+
+
 namespace azure\authorisation;
 
+use GuzzleHttp\Client as HttpClient;
 class Token
 {
 
@@ -23,7 +26,7 @@ class Token
 
     public static function getKeyVaultToken(array $azureAppDetails)
     {
-        $guzzle = new \GuzzleHttp\Client();
+        $guzzle = new HttpClient();
 
         $token = $guzzle->post(
             "https://login.windows.net/{$azureAppDetails['appTenantDomainName']}/oauth2/token",
@@ -39,5 +42,6 @@ class Token
         )->getBody()->getContents();
 
         return json_decode($token, true)['access_token'];
+
     }
 }
