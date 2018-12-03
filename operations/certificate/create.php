@@ -25,4 +25,4 @@ $keyVault = new keyVaultCert(
     ]
 );
 //"CREATE CERT"
-var_dump($keyVault->create('cert22112','CN=cert22112'));
+var_dump($keyVault->create('cert3011','CN=cert3011'));

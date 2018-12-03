@@ -27,4 +27,4 @@ $keyVault = new keyVaultCert(
 );
 
 //GET CSR
-var_dump($keyVault->getCSR('cert22112'));
+var_dump($keyVault->getCSR('cert3011'));
