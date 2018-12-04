@@ -26,4 +26,4 @@ $keyVault = new keyVaultCert(
     ]
 );
 
-var_dump($keyVault->getCert('cert15112'));
+var_dump($keyVault->getCert('cert22112'));

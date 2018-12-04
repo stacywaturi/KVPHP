@@ -27,7 +27,7 @@ $keyVault = new keyVaultCert(
 );
 
 //var_dump($keyVault->merge('cert15112','newfile.crt'));
-$mergeCertResponse = $keyVault->merge('cert15112','newfile.crt');
+$mergeCertResponse = $keyVault->merge('cert22112','cert22112.crt');
 if($mergeCertResponse["responsecode"]==201)
 {
     var_dump($mergeCertResponse);

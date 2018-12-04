@@ -96,7 +96,7 @@ class Certificate extends Vault
     {
         $apiCall = "certificates/{$certName}/pending/merge?api-version=2016-10-01";
         $myfile = fopen("certs/".$fileName,"r") or die("Unable to open file");
-        $cert = fread($myfile, filesize("CSRs/".$fileName));
+        $cert = fread($myfile, filesize("certs/".$fileName));
 
         $cert = str_replace("-----BEGIN CERTIFICATE-----\r\n", "", $cert );
         $cert = str_replace("\r\n-----END CERTIFICATE-----", "", $cert );
@@ -133,6 +133,34 @@ class Certificate extends Vault
 
             fclose($myfile);
             return $Cert;
+        }
+
+        else {
+            var_dump($response["responseMessage"]);
+            return -1;
+        }
+
+    }
+
+    /*List certificates in a specified key vault
+    The GetCertificates operation returns the set of certificates resources in the specified key vault.
+    This operation requires the certificates/list permission.
+   --------------------------------------------------------------------------------
+   GET {vaultBaseUrl}/certificates?api-version=7.0
+    **optional
+    GET {vaultBaseUrl}/certificates?maxresults={maxresults}&includePending={includePending}&api-version=7.0
+   --------------------------------------------------------------------------------
+   */
+    public function listCerts()
+    {
+        $apiCall = "certificates?api-version=7.0";
+
+        $response = $this->requestApi('GET', $apiCall);
+
+        var_dump($response);
+
+        if ($response["responsecode"]==200) {
+            return $response["responseMessage"];
         }
 
         else {
