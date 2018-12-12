@@ -12,19 +12,34 @@ use azure\keyvault\Certificate as keyVaultCert;
 use azure\authorisation\Token as azureAuthorisation;
 use azure\Config;
 
-$keyVault = new keyVaultCert(
-    [
-        'accessToken'  => azureAuthorisation::getKeyVaultToken(
-            [
-                'appTenantDomainName'   => Config::$APP_TENANT_ID,
-                'clientId'              => Config::$CLIENT_ID,
-                'username'              => Config::$USERNAME,
-                'password'              => Config::$PASSWORD
-            ]
-        ),
-        'keyVaultName' => Config::$KEY_VAULT_NAME
-    ]
-);
+session_start();
+if($_SESSION['user']){
+}
+else{
+    header("location:index.php");
+}
 
-//GET CSR
-var_dump($keyVault->getCSR('cert22112'));
+ if($_SERVER['REQUEST_METHOD'] = "POST"){
+
+    $name = $_POST['name'];
+    $keyVault = new keyVaultCert(
+        [
+            'accessToken'  => azureAuthorisation::getKeyVaultToken(
+                [
+                    'appTenantDomainName'   => Config::$APP_TENANT_ID,
+                    'clientId'              => Config::$CLIENT_ID,
+                    'username'              => Config::$USERNAME,
+                    'password'              => Config::$PASSWORD
+                ]
+            ),
+            'keyVaultName' => Config::$KEY_VAULT_NAME
+        ]
+    );
+
+    //GET CSR
+    $getCSRResponse =  $keyVault->getCSR($name);
+
+    Print $getCSRResponse;
+       
+}
+?>

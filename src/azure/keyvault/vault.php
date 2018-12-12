@@ -80,9 +80,12 @@ abstract class Vault
                 json_decode($result->getBody()->getContents(), true)
             );
         } catch (\GuzzleHttp\Exception\ClientException $e) {
+            $jsonDecode = json_decode($e->getResponse()->getBody()->getContents(), true);
+            $arrayShift = array_shift($jsonDecode);
             return $this->setOutput(
                 $e->getResponse()->getStatusCode(),
-                array_shift(json_decode($e->getResponse()->getBody()->getContents(), true))
+                $arrayShift
+                
             );
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             return $this->setOutput(

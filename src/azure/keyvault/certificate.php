@@ -61,7 +61,7 @@ class Certificate extends Vault
         $apiCall = "certificates/{$certName}/pending?api-version=2016-10-01";
 
          $response = $this->requestApi('GET', $apiCall);
-         var_dump($response);
+         // var_dump($response);
          if ($response["responsecode"]==200) {
              $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n" . $response['data']['csr'] . "\n-----END CERTIFICATE REQUEST-----";
 
@@ -122,7 +122,7 @@ class Certificate extends Vault
 
         $response = $this->requestApi('GET', $apiCall);
 
-        var_dump($response);
+        //var_dump($response);
 
         if ($response["responsecode"]==200) {
             $Cert = "-----BEGIN CERTIFICATE-----\n" . $response['data']['cer'] . "\n-----END CERTIFICATE-----";
@@ -133,6 +133,33 @@ class Certificate extends Vault
 
             fclose($myfile);
             return $Cert;
+        }
+
+        else {
+            var_dump($response["responseMessage"]);
+            return -1;
+        }
+
+    }
+    /*List certificates in a specified key vault
+   The GetCertificates operation returns the set of certificates resources in the specified key vault.
+   This operation requires the certificates/list permission.
+  --------------------------------------------------------------------------------
+  GET {vaultBaseUrl}/certificates?api-version=7.0
+   **optional
+   GET {vaultBaseUrl}/certificates?maxresults={maxresults}&includePending={includePending}&api-version=7.0
+  --------------------------------------------------------------------------------
+  */
+    public function listCSRs()
+    {
+        $apiCall = "certificates?api-version=7.0";
+
+        $response = $this->requestApi('GET', $apiCall);
+
+        var_dump($response);
+
+        if ($response["responsecode"]==200) {
+            return $response["responseMessage"];
         }
 
         else {
