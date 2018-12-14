@@ -1,7 +1,8 @@
 <?php
 
 /*
-
+* Abstract class that handles the Key Vault methods
+*  
 */
 
 namespace azure\keyvault;

@@ -26,9 +26,9 @@ else{
         [
             'accessToken'  => azureAuthorisation::getKeyVaultToken(
                 [
-                    'appTenantDomainName'   => Config::$APP_TENANT_ID,
+					'appTenantDomainName'   => Config::$APP_TENANT_ID,
                     'clientId'              => Config::$CLIENT_ID,
-                    'username'              => Config::$USERNAME,
+					'username'              => Config::$USERNAME,
                     'password'              => Config::$PASSWORD
                 ]
             ),

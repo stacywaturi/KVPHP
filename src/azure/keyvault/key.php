@@ -1,11 +1,13 @@
 <?php
 
 /*
+* Class that handles key operations in the Key Vault
 *
 *
+* @author stacy
+* @date 2018-11-12
 *
 */
-
 namespace azure\keyvault;
 
 class Key extends Vault

@@ -12,24 +12,39 @@ use azure\keyvault\Key as keyVaultKey;
 use azure\authorisation\Token as azureAuthorisation;
 use azure\Config;
 
-$keyVault = new KeyVaultKey(
-    [
-        'accessToken'  => azureAuthorisation::getKeyVaultToken(
-            [
-                'appTenantDomainName'   => Config::$APP_TENANT_ID ,
-                'clientId'              => Config::$CLIENT_ID,
-                'username'              => Config::$USERNAME,
-                'password'              => Config::$PASSWORD
-            ]
-        ),
-        'keyVaultName' => Config::$KEY_VAULT_NAME
-    ]
-);
-$getKeyResponse = $keyVault->get("key1311");
+session_start();
 
-if ($getKeyResponse["responsecode"] == 200) {
-    var_dump($getKeyResponse['data']['key']);
+if($_SESSION['user']){
 }
-else {
-    var_dump($getKeyResponse["responseMessage"]);
+else{
+    header("location:index.php");
+}
+
+if($_SERVER['REQUEST_METHOD'] = "POST"){
+
+    $name = $_POST['name'];
+
+    $keyVault = new KeyVaultKey(
+        [
+            'accessToken'  => azureAuthorisation::getKeyVaultToken(
+                [
+                    'appTenantDomainName'   => Config::$APP_TENANT_ID ,
+                    'clientId'              => Config::$CLIENT_ID,
+                    'username'              => Config::$USERNAME,
+                    'password'              => Config::$PASSWORD
+                ]
+            ),
+            'keyVaultName' => Config::$KEY_VAULT_NAME
+        ]
+    );
+
+    $getKeyResponse = $keyVault->get($name);
+
+   
+    if ($getKeyResponse["responsecode"] == 200) {
+        var_dump($getKeyResponse['data']['key']);
+    }
+    else {
+        var_dump($getKeyResponse["responseMessage"]);
+    }
 }

@@ -1,10 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: stacy
- * Date: 2018/11/13
- * Time: 10:16
- */
+/*
+* Class that handles certificate operations in the Key Vault
+*
+* @author stacy
+* @date 2018-11-12
+*
+*/
 
 namespace azure\keyvault;
 
@@ -16,7 +18,7 @@ class Certificate extends Vault
         parent::__construct($keyVaultDetails);
     }
 
-    /*Creates a new certificate.
+    /* Creates a new certificate.
     If this is the first version, the certificate resource is created.
     This operation requires the certificates/create permission.
     --------------------------------------------------------------------------------
@@ -48,7 +50,7 @@ class Certificate extends Vault
         return $this->requestApi('POST', $apiCall, $options);
     }
 
-    /*Gets the creation operation of a certificate.
+    /* Gets the creation operation of a certificate.
     Gets the creation operation associated with a specified certificate.
     This operation requires the certificates/get permission.
     --------------------------------------------------------------------------------
@@ -79,7 +81,7 @@ class Certificate extends Vault
          }
     }
 
-    /*Merges a certificate or a certificate chain with a key pair existing on the server.
+    /* Merges a certificate or a certificate chain with a key pair existing on the server.
    The MergeCertificate operation performs the merging of a certificate or certificate chain
    with a key pair currently available in the service.
    This operation requires the certificates/create permission.
@@ -109,7 +111,7 @@ class Certificate extends Vault
 
     }
 
-    /*Gets information about a certificate.
+    /* Gets information about a certificate.
    Gets information about a specific certificate.
    This operation requires the certificates/get permission.
    --------------------------------------------------------------------------------
@@ -141,7 +143,8 @@ class Certificate extends Vault
         }
 
     }
-    /*List certificates in a specified key vault
+
+    /* List certificates in a specified key vault
    The GetCertificates operation returns the set of certificates resources in the specified key vault.
    This operation requires the certificates/list permission.
   --------------------------------------------------------------------------------
@@ -169,7 +172,7 @@ class Certificate extends Vault
 
     }
 
-    /*List certificates in a specified key vault
+    /* List certificates in a specified key vault
     The GetCertificates operation returns the set of certificates resources in the specified key vault.
     This operation requires the certificates/list permission.
    --------------------------------------------------------------------------------

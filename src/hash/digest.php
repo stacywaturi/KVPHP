@@ -50,9 +50,10 @@ class digest
         return $this->output;
     }
 
-    /*Call to HASH DOCUMENT
+    /* Call to HASH DOCUMENT
     The path defines the location of the file
-    The algorithm defines the algorithm used to hash the file*/
+    The algorithm defines the algorithm used to hash the file
+    */
 
     public function hashDoc(string $path, string $algo)
     {
@@ -75,9 +76,10 @@ class digest
        return hash_file($algorithm, $path, true);
     }
 
-    /*Call to HASH STRING
+    /* Call to HASH STRING
     The path defines the string to be hashed
-    The algorithm defines the algorithm used to hash the string*/
+    The algorithm defines the algorithm used to hash the string
+    */
     public function hashString(string $string, string $algo)
     {
         if ($algo == "RS256" || $algo == "ES256") {

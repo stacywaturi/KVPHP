@@ -41,6 +41,28 @@
             Certificate Name: <input type="text" name="name"/><br>
             <input type="submit" name="Get Cert"  />
         </form>
+
+        <h3>Create Key</h3>
+		 <form action="../operations/key/create.php" method="POST">
+            Key Name: <input type="text" name="name"/><br>
+            Key type: <input type="text" name="keyType"/><br>
+            Key Size: <input type="text" name="keySize"/><br>
+            <input type="submit" name="Create Key"  />
+        </form>
+
+        <h3>Get Key</h3>
+		 <form action="../operations/key/get.php" method="POST">
+            Key Name: <input type="text" name="name"/><br>
+            <input type="submit" name="Get Key"  />
+        </form>
+
+         <h3>Sign</h3>
+		 <form action="../operations/key/sign.php" method="POST">
+            Key name 	: <input type="text" name="name"/><br>
+            Signing Algorithm 	: <input type="text" name="algorithm"/><br>
+            Hash 	: <input type="text" name="value"/><br>
+            <input type="submit" name="Sign"  />
+        </form>
 		
 		
 	</body>

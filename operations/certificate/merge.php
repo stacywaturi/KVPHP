@@ -13,6 +13,7 @@ use azure\authorisation\Token as azureAuthorisation;
 use azure\Config;
 
 session_start();
+
 if($_SESSION['user']){
 }
 else{

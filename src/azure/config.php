@@ -17,3 +17,5 @@ class Config {
     static $WEBSITE_NAME = 'My New Website';
     static $IMAGE_DIR    = 'img';
 }
+
+
