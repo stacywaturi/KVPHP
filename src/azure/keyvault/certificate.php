@@ -63,22 +63,10 @@ class Certificate extends Vault
         $apiCall = "certificates/{$certName}/pending?api-version=2016-10-01";
 
          $response = $this->requestApi('GET', $apiCall);
+         
+         return $response;
          // var_dump($response);
-         if ($response["responsecode"]==200) {
-             $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n" . $response['data']['csr'] . "\n-----END CERTIFICATE REQUEST-----";
-
-             $myfile = fopen("CSRs/".$certName.".csr", "w") or die ("Unable to open file!");
-
-             fwrite($myfile, $CSR);
-
-             fclose($myfile);
-             return $CSR;
-         }
-
-         else {
-             var_dump($response["responseMessage"]);
-             return -1;
-         }
+         
     }
 
     /* Merges a certificate or a certificate chain with a key pair existing on the server.
@@ -124,23 +112,9 @@ class Certificate extends Vault
 
         $response = $this->requestApi('GET', $apiCall);
 
+        return $response;
         //var_dump($response);
 
-        if ($response["responsecode"]==200) {
-            $Cert = "-----BEGIN CERTIFICATE-----\n" . $response['data']['cer'] . "\n-----END CERTIFICATE-----";
-
-            $myfile = fopen("certs/".$certName.".crt", "w") or die ("Unable to open file!");
-
-            fwrite($myfile, $Cert);
-
-            fclose($myfile);
-            return $Cert;
-        }
-
-        else {
-            var_dump($response["responseMessage"]);
-            return -1;
-        }
 
     }
 
@@ -155,20 +129,20 @@ class Certificate extends Vault
   */
     public function listCSRs()
     {
-        $apiCall = "certificates?api-version=7.0";
+        $apiCall = "certificates?&includePending=true&api-version=7.0";
 
         $response = $this->requestApi('GET', $apiCall);
 
-        var_dump($response);
+       // var_dump($response);
+         return $response;
+        // if ($response["responsecode"]==200) {
+        //     return $response["responseMessage"];
+        // }
 
-        if ($response["responsecode"]==200) {
-            return $response["responseMessage"];
-        }
-
-        else {
-            var_dump($response["responseMessage"]);
-            return -1;
-        }
+        // else {
+        //     var_dump($response["responseMessage"]);
+        //     return -1;
+        // }
 
     }
 
@@ -187,16 +161,7 @@ class Certificate extends Vault
 
         $response = $this->requestApi('GET', $apiCall);
 
-        var_dump($response);
-
-        if ($response["responsecode"]==200) {
-            return $response["responseMessage"];
-        }
-
-        else {
-            var_dump($response["responseMessage"]);
-            return -1;
-        }
+       return $response;
 
     }
 }

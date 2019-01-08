@@ -57,6 +57,25 @@ class Key extends Vault
         return $response;
     }
 
+
+    /* List keys in the specified vault.
+    Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a stored key. 
+    The LIST operation is applicable to all key types, however only the base key identifier, attributes, and tags are provided in the response. 
+    Individual versions of a key are not listed in the response. 
+    This operation requires the keys/list permission.
+    --------------------------------------------------------------------------------
+    GET {vaultBaseUrl}/keys?api-version=7.0
+    --------------------------------------------------------------------------------
+    */
+    public function listKeys()
+    {
+
+        $apiCall = "keys?api-version=2016-10-01";
+        $response = $this->requestApi('GET', $apiCall);
+
+        return $response;
+    }
+
     /*Creates a signature from a digest using the specified key.
     The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since
     this operation uses the private portion of the key.
@@ -79,4 +98,31 @@ class Key extends Vault
 
        return $this->requestApi('POST', $apiCall, $options);
    }
+
+   /*Verifies a signature using a specified key.
+    The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. 
+    VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since
+    signature verification can be performed using the public portion of the key but
+    this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key.
+    This operation requires the keys/verify permission.
+    --------------------------------------------------------------------------------
+    POST {vaultBaseUrl}/keys/{key-name}/{key-version}/verify?api-version=7.0
+    Request Body: alg{signing/verification algorithm identifier}, value{string}
+    --------------------------------------------------------------------------------
+    */
+
+    public function verify(string $keyID, string $algorithm,string $digest, string $value)
+    {
+       $kID = substr($keyID, strpos($keyID, "/keys/")+1);
+       $apiCall =  $kID."/verify?api-version=2016-10-01";
+
+       $options = [
+           'alg' => $algorithm,
+           'digest' => $digest,
+           'value' => $value
+
+       ];
+
+       return $this->requestApi('POST', $apiCall, $options);
+    }
 }

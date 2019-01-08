@@ -37,9 +37,25 @@ else{
     );
 
     //GET CSR
-    $getCSRResponse =  $keyVault->getCSR($name);
+    $response =  $keyVault->getCSR($name);
 
-    Print $getCSRResponse;
+    if ($response["responsecode"]==200) {
+        var_dump($response);
+         $CSR = "-----BEGIN CERTIFICATE REQUEST-----\n" . $response['data']['csr'] . "\n-----END CERTIFICATE REQUEST-----";
+
+         $myfile = fopen("CSRs/".$name.".csr", "w") or die ("Unable to open file!");
+
+         fwrite($myfile, $CSR);
+
+         fclose($myfile);
+             
+         }
+
+         else {
+             var_dump($response["responseMessage"]);
+            // return -1;
+         }
+
        
 }
 ?>

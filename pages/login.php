@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Webpage1</title>
+        <title>Trust Factory</title>
     </head>
     <body>
         <h2>Login Page</h2>

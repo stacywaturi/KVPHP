@@ -3,27 +3,28 @@
  * Created by PhpStorm.
  * User: stacy
  * Date: 2018/11/15
- * Time: 15:33
+ * Time: 15:32
  */
 
 require '../../vendor/autoload.php';
 
-use azure\keyvault\Certificate as keyVaultCert;
+use azure\keyvault\Key as keyVaultKey;
 use azure\authorisation\Token as azureAuthorisation;
 use azure\Config;
 
 session_start();
+
 if($_SESSION['user']){
 }
 else{
     header("location:index.php");
 }
 
- if($_SERVER['REQUEST_METHOD'] = "POST"){
+if($_SERVER['REQUEST_METHOD'] = "POST"){
 
-    $name = $_POST['name'];
+    // $name = $_POST['name'];
 
-    $keyVault = new keyVaultCert(
+    $keyVault = new KeyVaultKey(
         [
             'accessToken'  => azureAuthorisation::getKeyVaultToken(
                 [
@@ -37,24 +38,17 @@ else{
         ]
     );
 
-    $response = $keyVault->getCert($name);
+    $getKeyResponse = $keyVault->listKeys();
 
-
-    if ($response["responsecode"]==200) {
-        var_dump($response["data"]);
-        $Cert = "-----BEGIN CERTIFICATE-----\n" . $response['data']['cer'] . "\n-----END CERTIFICATE-----";
-
-        $myfile = fopen("certs/".$name.".crt", "w") or die ("Unable to open file!");
-
-        fwrite($myfile, $Cert);
-
-        fclose($myfile);
-    
-
+   
+    if ($getKeyResponse["responsecode"] == 200) {
+        foreach ($getKeyResponse["data"]["value"] as $key) {
+           var_dump($key);
+        //  echo "<br><br>";
+        }
+       
     }
-
     else {
-        var_dump($response["responseMessage"]);
-        //return -1;
+        var_dump($getKeyResponse["responseMessage"]);
     }
 }

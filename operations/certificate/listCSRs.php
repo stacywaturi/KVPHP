@@ -21,7 +21,7 @@ else{
 
  if($_SERVER['REQUEST_METHOD'] = "POST"){
 
-    $name = $_POST['name'];
+    // $name = $_POST['name'];
 
     $keyVault = new keyVaultCert(
         [
@@ -36,25 +36,22 @@ else{
             'keyVaultName' => Config::$KEY_VAULT_NAME
         ]
     );
-
-    $response = $keyVault->getCert($name);
-
-
-    if ($response["responsecode"]==200) {
-        var_dump($response["data"]);
-        $Cert = "-----BEGIN CERTIFICATE-----\n" . $response['data']['cer'] . "\n-----END CERTIFICATE-----";
-
-        $myfile = fopen("certs/".$name.".crt", "w") or die ("Unable to open file!");
-
-        fwrite($myfile, $Cert);
-
-        fclose($myfile);
     
+    $listCSRsResponse =  $keyVault->listCSRs();
 
+    if ($listCSRsResponse["responsecode"] == 200) {
+        // var_dump($listCSRsResponse["data"]["value"]);
+        // echo "<br><br>";
+       foreach ($listCSRsResponse["data"]["value"] as $CSR) {
+        if ($CSR["attributes"]["enabled"] == false)
+            var_dump($CSR);
+            echo "<br>";
+       }
+
+       //var_dump($listCSRsResponse["data"]["value"]);
+        // var_dump(json_encode($listCSRsResponse["data"]["value"], JSON_PRETTY_PRINT)); 
     }
-
     else {
-        var_dump($response["responseMessage"]);
-        //return -1;
+        var_dump($listCSRsResponse["responseMessage"]);
     }
 }
