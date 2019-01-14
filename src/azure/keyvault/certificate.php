@@ -38,9 +38,19 @@ class Certificate extends Vault
         $apiCall = "certificates/{$certName}/create?api-version=2016-10-01";
         $options = [
             'policy'   => [
-                'x509_props' => [
-                    'subject' => $subject
+                'key_props' =>[
+                    'exportable' => false,
+                    'kty' => 'RSA',
+                    'key_size' => 2048,
+                    'reuse_key' => false
                 ],
+
+                'x509_props' => [
+                    'subject' => $subject,
+                    'validity_months' => 24
+
+                ],
+
                 'issuer' => [
                     'name'=> $issuer
                  ]

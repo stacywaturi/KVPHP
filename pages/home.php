@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
+    <?php
+    session_start();
+    if($_SESSION['user']){
+    }
+    else{
+        header("location:index.php");
+    }
+    $user = $_SESSION['user'];
+    ?>
+
 	<head>
 		<title>Trust Factory Certificates</title>
 	</head>
-	<?php
-	session_start();
-	if($_SESSION['user']){
-	}
-	else{
-		header("location:index.php");
-	}
-	$user = $_SESSION['user'];
-	?>
+
 	<body>
 		<h2>Home Page</h2>
 		<p>Hello <?php Print "$user"?>!</p>

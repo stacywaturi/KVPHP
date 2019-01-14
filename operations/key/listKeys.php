@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
     if ($getKeyResponse["responsecode"] == 200) {
         foreach ($getKeyResponse["data"]["value"] as $key) {
            var_dump($key);
-        //  echo "<br><br>";
+           echo "<br><br>";
         }
        
     }

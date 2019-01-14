@@ -111,6 +111,10 @@ class Key extends Vault
     --------------------------------------------------------------------------------
     */
 
+   /*
+    *
+    */
+
     public function verify(string $keyID, string $algorithm,string $digest, string $value)
     {
        $kID = substr($keyID, strpos($keyID, "/keys/")+1);

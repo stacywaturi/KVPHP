@@ -37,6 +37,7 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
     // $base64URLEncoded = $base64URLObj->encode($digest);
     // var_dump($base64URLEncoded);
 
+
     $keyVault = new KeyVaultKey(
         [
             'accessToken'  => azureAuthorisation::getKeyVaultToken(
