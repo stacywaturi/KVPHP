@@ -32,23 +32,32 @@ class Certificate extends Vault
             "name":"Self"/"Unknown"}
     --------------------------------------------------------------------------------
     */
-    public function create(string $certName, string $subject)
+    
+    public function create(string $certName, string $subject, string $keyType, string $keySize)
     {
+        if ($keyType == "" ) {
+            $keyType = "RSA";
+
+        }
+
+        if($keySize == ""){
+            $keySize = "2048";
+        }
+
         $issuer = 'Unknown';
         $apiCall = "certificates/{$certName}/create?api-version=2016-10-01";
         $options = [
             'policy'   => [
                 'key_props' =>[
                     'exportable' => false,
-                    'kty' => 'RSA',
-                    'key_size' => 2048,
+                    'kty' => $keyType,
+                    'key_size' => $keySize,
                     'reuse_key' => false
                 ],
 
                 'x509_props' => [
                     'subject' => $subject,
                     'validity_months' => 24
-
                 ],
 
                 'issuer' => [
@@ -88,7 +97,7 @@ class Certificate extends Vault
 
     Request Body:
     {
-    "x5c": [ MIICxTCCAbiEPAQj8= ]
+    "x5c": [ MIICxTCCAbi...EPAQj8= ]
     }
    --------------------------------------------------------------------------------
    */
@@ -160,7 +169,7 @@ class Certificate extends Vault
     The GetCertificates operation returns the set of certificates resources in the specified key vault.
     This operation requires the certificates/list permission.
    --------------------------------------------------------------------------------
-   GET {vaultBaseUrl}/certificates?api-version=7.0
+    GET {vaultBaseUrl}/certificates?api-version=7.0
     **optional
     GET {vaultBaseUrl}/certificates?maxresults={maxresults}&includePending={includePending}&api-version=7.0
    --------------------------------------------------------------------------------

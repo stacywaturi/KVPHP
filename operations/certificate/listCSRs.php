@@ -21,7 +21,7 @@ else{
 
  if($_SERVER['REQUEST_METHOD'] = "POST"){
 
-    // $name = $_POST['name'];
+    
 
     $keyVault = new keyVaultCert(
         [
@@ -40,16 +40,14 @@ else{
     $listCSRsResponse =  $keyVault->listCSRs();
 
     if ($listCSRsResponse["responsecode"] == 200) {
-        // var_dump($listCSRsResponse["data"]["value"]);
-        // echo "<br><br>";
-       foreach ($listCSRsResponse["data"]["value"] as $CSR) {
+        
+               foreach ($listCSRsResponse["data"]["value"] as $CSR) {
+
         if ($CSR["attributes"]["enabled"] == false)
             var_dump($CSR);
             echo "<br>";
        }
 
-       //var_dump($listCSRsResponse["data"]["value"]);
-        // var_dump(json_encode($listCSRsResponse["data"]["value"], JSON_PRETTY_PRINT)); 
     }
     else {
         var_dump($listCSRsResponse["responseMessage"]);

@@ -22,7 +22,7 @@
 namespace hash;
 
 
-class digest
+class Digest
 {
     private $output;
 

@@ -16,7 +16,7 @@ session_start();
 
 if($_SESSION['user']){
 }
-else{
+else {
     header("location:index.php");
 }
 
@@ -46,5 +46,6 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
     }
     else {
         var_dump($getKeyResponse["responseMessage"]);
+
     }
 }

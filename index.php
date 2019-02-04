@@ -9,7 +9,7 @@
 	?>
 	 <br/>
 	<a href="pages/login.php"> Click here to Login  <br/>
-	<a href="pages/register.php"> Click here to Register  <br/>
+	<a href="pages/signup.php"> Click here to Register  <br/>
 	
 </body>
 </html>

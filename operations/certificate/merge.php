@@ -38,14 +38,15 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
         ]
     );
 
-    //var_dump($keyVault->merge('cert15112','newfile.crt'));
+   
     $mergeCertResponse = $keyVault->merge($name,$filename);
+
     if($mergeCertResponse["responsecode"]==201)
     {
         var_dump($mergeCertResponse);
     }
     else
-        {
+    {
         var_dump($mergeCertResponse["responseMessage"]);
     }
 }

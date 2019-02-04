@@ -2,7 +2,7 @@
   class Database {
     // DB Params
     private $host = 'localhost';
-    private $db_name = 'first_db';
+    private $db_name = 'cloud_key';
     private $username = 'root';
     private $password = '';
     private $conn;

@@ -27,6 +27,7 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
     $algorithm = $_POST['algorithm'];
     $hashValue = $_POST['value'];
     $signature = $_POST['signature'];
+
     //Create DIGEST with BASE64URL encoding
     // $input = "file.txt";
     // $method = "RS512";
@@ -52,12 +53,11 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
         ]
     );
     $keyResponse = $keyVault->get($keyName);
-    //var_dump($keyVault->get("key1311"));
+   
     if($keyResponse["responsecode"] == 200){
         $keyID=$keyResponse['data']['key']['kid'];
         $verifyResponse = $keyVault->verify($keyID, $algorithm, $hashValue, $signature);
-        // var_dump($signResponse);
-
+  
         if ($verifyResponse["responsecode"] == 200)
             $response = $verifyResponse['data'];
 
@@ -71,4 +71,3 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
     else
         var_dump($keyResponse["responseMessage"]);
 }
-//var_dump(substr($keyID, strpos($keyID, "/keys/")+1));

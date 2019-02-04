@@ -22,7 +22,7 @@ class Key extends Vault
     The create key operation can be used to create any key type in Azure Key Vault.
     If the named key already exists, Azure Key Vault creates a new version of the key.
     It requires the keys/create permission.
-    --------------------------------------------------------------------------------
+    -------------------------------------------------------------------------------
     POST {vaultBaseUrl}/keys/{key-name}/create?api-version=2016-10-01
     Request Body: kty{RSA,EC}, key_size{int}
     --------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ class Key extends Vault
     public function create(string $keyName, string $keyType, string $keySize)
     {
         $apiCall = "keys/{$keyName}/create?api-version=2016-10-01";
-
+        
         $options = [
             'kty' => $keyType,
             'key_size' => $keySize
@@ -110,11 +110,6 @@ class Key extends Vault
     Request Body: alg{signing/verification algorithm identifier}, value{string}
     --------------------------------------------------------------------------------
     */
-
-   /*
-    *
-    */
-
     public function verify(string $keyID, string $algorithm,string $digest, string $value)
     {
        $kID = substr($keyID, strpos($keyID, "/keys/")+1);

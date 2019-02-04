@@ -7,8 +7,8 @@
  */
 
 require '../../vendor/autoload.php';
-use hash\digest as Digest;
-use hash\base64url as Base64url;
+use hash\Digest as Digest;
+use hash\Base64url as Base64url;
 use azure\keyvault\Key as keyVaultKey;
 use azure\authorisation\Token as azureAuthorisation;
 use azure\Config;
@@ -26,6 +26,9 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
     $keyName = $_POST['name'];
     $algorithm = $_POST['algorithm'];
     $hashValue = $_POST['value'];
+	
+	/* Generates hash value as well as bas64 encoding
+	*/
     //Create DIGEST with BASE64URL encoding
     // $input = "file.txt";
     // $method = "RS512";
@@ -50,11 +53,11 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
         ]
     );
     $keyResponse = $keyVault->get($keyName);
-    //var_dump($keyVault->get("key1311"));
+
     if($keyResponse["responsecode"] == 200){
         $keyID=$keyResponse['data']['key']['kid'];
         $signResponse = $keyVault->sign($keyID, $algorithm, $hashValue);
-        // var_dump($signResponse);
+
 
         if ($signResponse["responsecode"] == 200)
             $signature = $signResponse['data']['value'];
@@ -69,4 +72,5 @@ if($_SERVER['REQUEST_METHOD'] = "POST"){
     else
         var_dump($keyResponse["responseMessage"]);
 }
-//var_dump(substr($keyID, strpos($keyID, "/keys/")+1));
+
+

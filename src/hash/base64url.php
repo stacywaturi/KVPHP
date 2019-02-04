@@ -9,7 +9,7 @@
 namespace hash;
 
 
-class base64url
+class Base64url
 {
 
     public function encode($data)

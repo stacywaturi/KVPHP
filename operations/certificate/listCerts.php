@@ -20,14 +20,12 @@ else{
 }
 
  if($_SERVER['REQUEST_METHOD'] = "POST"){
-
-    // $name = $_POST['name'];
-
+     
     $keyVault = new keyVaultCert(
         [
             'accessToken'  => azureAuthorisation::getKeyVaultToken(
                 [
-                    'appTenantDomainName'   => Config::$APP_TENANT_ID ,
+                    'appTenantDomainName'   => Config::$APP_TENANT_ID,
                     'clientId'              => Config::$CLIENT_ID,
                     'username'              => Config::$USERNAME,
                     'password'              => Config::$PASSWORD
@@ -48,8 +46,8 @@ else{
             echo "<br><br>";
        }
 
-       //var_dump($listCSRsResponse["data"]["value"]);
-        // var_dump(json_encode($listCSRsResponse["data"]["value"], JSON_PRETTY_PRINT)); 
+    //var_dump($listCSRsResponse["data"]["value"]);
+    // var_dump(json_encode($listCSRsResponse["data"]["value"], JSON_PRETTY_PRINT)); 
     }
     else {
         var_dump($listCertsResponse["responseMessage"]);
